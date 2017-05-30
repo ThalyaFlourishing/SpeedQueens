@@ -28,4 +28,28 @@ var display = function(input){
   console.log(input);
 }
 
-// permGenDisplayOnly(['a', 'b', 'c', 'd'], display);
+var displayPermutationMatrix = function(matrix) {
+
+  var outputString = '';
+
+  for(var i = 0; i < matrix.length; i++) {
+    outputString += ('|' + matrix[i].join('|') + '|\n');
+    }
+  
+  return outputString + '\n';
+}
+
+
+var showBoard = function(permutation) {
+  return console.log(displayPermutationMatrix(translatePermutationToCharacterMatrix(permutation)));
+}
+
+var showBoards = function(permutationList) {
+  let i = 0;
+    window.setInterval(function() {
+      if(permutationList[i]) {
+        showBoard(permutationList[i]);
+        i++;
+      };
+    }, 40);
+}
