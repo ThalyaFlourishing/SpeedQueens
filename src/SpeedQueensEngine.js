@@ -1,5 +1,36 @@
 var permutationsArray = [];
+var solutionsArray = [];
 var COUNT = 1;
+
+var permTestEngine = function (n, inputArray) {  // COMPLEXITY = O(n! * (n^2 + n) )
+  
+  if (n < 1) { return 'Input value must be positive.'; };
+  
+  if(inputArray){
+    array = inputArray.slice();
+    } else {
+      array = starterArrayGen(n);
+    };
+
+  if (n === 1) {
+//    permutationsArray.push(array);
+    console.log('CALL TO TEST FUNCTION ', COUNT++);
+    //  IF TEST FUNCTION RETURNS TRUE
+      // PUSH TO SOLUTIONS ARRAY
+    // DISPLAY SOLUTION PERM, SOLUTION BOARD, AND A MESSAGE ANNOUNCING SOLUTION
+  } else {
+    for (var i = 1; i <= n; i += 1) {
+      permGenArray((n - 1), array);
+      if (n % 2) {
+        var j = 1;
+      } else {
+        var j = i;
+      }
+      swap(array, j - 1, n - 1); // -1 TO ACCOUNT FOR JAVASCRIPT ZERO-INDEXING
+    }
+  }
+  return 'The number of nQueens solutions for a board of size ', n, ' is ', solutionsArray.length;
+};
 
 var permGenArray = function (n, inputArray) {
   
