@@ -95,6 +95,22 @@ var translatePermutationToCharacterMatrix = function(permutation) {
 };
 
 //=============================================================================//
+//========  FUNCTION TO DISPLAY A SINGLE PERMUTATION AS A CHESS BOARD  ========//
+//=============================================================================//
+
+var displayPermutationMatrix = function(matrix) {
+
+  var outputString = '';
+
+  for(var i = 0; i < matrix.length; i++) {
+    outputString += ('|' + matrix[i].join('|') + '|\n');
+    }
+  
+  return outputString + '\n';
+}
+
+
+//=============================================================================//
 //====  FUNCTION TO SEQUENTIALLY DISPLAY ALL PERMUTATIONS AS CHESS BOARDS  ====//
 //=============================================================================//
 

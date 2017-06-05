@@ -1,10 +1,3 @@
-
-var swap = function (array, pos1, pos2) {
-  var temp = array[pos1];
-  array[pos1] = array[pos2];
-  array[pos2] = temp;
-};
-
 var permGenDisplayOnly = function (array, output, n) {
   n = n || array.length; // SET N DEFAULT TO ARRAY.LENGTH
   if (n === 1) {
@@ -21,12 +14,20 @@ var permGenDisplayOnly = function (array, output, n) {
     }
   }
 };
+// --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  //
+var swap = function (array, pos1, pos2) {
+  var temp = array[pos1];
+  array[pos1] = array[pos2];
+  array[pos2] = temp;
+};
 
+//=============================================================================//
+//=============================================================================//
 
-// For testing:
 var display = function(input){
   console.log(input);
 }
+
 
 var displayPermutationMatrix = function(matrix) {
 
@@ -39,10 +40,8 @@ var displayPermutationMatrix = function(matrix) {
   return outputString + '\n';
 }
 
-
-var showBoard = function(permutation) {
-  return console.log(displayPermutationMatrix(translatePermutationToCharacterMatrix(permutation)));
-}
+//=============================================================================//
+//=============================================================================//
 
 var showBoards = function(permutationList) {
   let i = 0;
@@ -53,3 +52,8 @@ var showBoards = function(permutationList) {
       };
     }, 40);
 }
+// --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  //
+var showBoard = function(permutation) {
+  return console.log(displayPermutationMatrix(translatePermutationToCharacterMatrix(permutation)));
+}
+
