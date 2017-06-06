@@ -6,7 +6,7 @@
                                   // THEN IT DOES NOT MATTER
                         // INFOZ: . YOU DO NOT NEED TO WORRY ABOUT SEARCHING PAST THE BOTTOM
                                   // OF THE BOARD BECAUSE THERE WILL NEVER BE PIECES THERE
-                                  // THE FALSE-POSITIVES COME FROM WRAPPING OVER COLUMS, NOT ROWS
+                                  // THE FALSE-POSITIVES COME FROM WRAPPING OVER COLUMNS, NOT ROWS
 
 // DELCARE FUNCTION WITH A SINGLE PERM ARRAY AS INPUT
 function nQueensTest(permArray) {  // COMPLEXITY: O(n^2 + n)
@@ -42,7 +42,7 @@ function nQueensTest(permArray) {  // COMPLEXITY: O(n^2 + n)
       // TEST FOR MINOR DIAGONAL ALIGNMENT
         if(((locationArray[j] - locationArray[i]) % (n-1)) === 0 ){  // MINOR DIAG COLLISION TEST
           return false
-          }
+        }
       };
 
 
@@ -52,7 +52,7 @@ function nQueensTest(permArray) {  // COMPLEXITY: O(n^2 + n)
       // TEST FOR MAJOR DIAGONAL ALIGNMENT
         if(((locationArray[j] - locationArray[i]) % (n+1)) === 0 ){  // MAJOR DIAG COLLISION TEST
           return false
-          }
+        }
       }; // END SECOND IF
     };   // END J FOR LOOP
   };     // END I FOR LOOP
@@ -91,24 +91,9 @@ function nQueensTest(permArray) {  // COMPLEXITY: O(n^2 + n)
 
 
 // https://stackoverflow.com/questions/9229645/remove-duplicates-from-javascript-array
-// DUPE TRUTH-TEST ACQUIRED FROM STACK-OVERFLOW: function uniq(a) {
-function uniq(array) {
-    var seen = {};
-    var out = [];
-    var len = array.length;
-    var j = 0;
-    for(var i = 0; i < len; i++) {
-         var item = array[i];
-         if(seen[item] !== 1) {
-               seen[item] = 1;
-               out[j++] = item;
-         }
-    }
-    return out;
-}
+// DUPE TRUTH-TEST ACQUIRED FROM STACK-OVERFLOW:
 
-
-function isUniq(array) {
+function isUnique(array) {
     var seen = {};
     var len = array.length;
     var j = 0;

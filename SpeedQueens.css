@@ -1,0 +1,32 @@
+
+ body {
+  background-color: #000000;
+  color: #FF9944;
+  font: 15px OCR A;
+}
+
+table {
+  padding: 4;
+}
+
+.tableHeader {
+  background-color: #000000;
+  color: #449944;
+  font: 15px OCR A;
+  padding: 4;
+}
+
+.name {
+  background-color: #222222;
+  color: #4477CC;
+  font: 13px OCR A;
+  text-align: right;
+  padding: 4;
+}
+
+.description {
+  background-color: #000000;
+  color: #FF9944;
+  font: 13px OCR A;
+  padding: 4;
+}

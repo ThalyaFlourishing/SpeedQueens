@@ -1,0 +1,84 @@
+<HTML>
+
+  <HEAD>
+    <META charset="utf-8">
+    <TITLE>SPEED QUEENS</TITLE>
+    <LINK rel="stylesheet" href="SpeedQueens.css">
+    <SCRIPT SRC= "src/SpeedQueensEngine.js"></SCRIPT>
+    <SCRIPT SRC= "src/nQueensTester.js"></SCRIPT>
+  </HEAD>
+
+  <HEADER style="font-family:OCR A">
+  	<FONT COLOR="#FFAA00" SIZE = 20>
+  		<CENTER> SPEED QUEENS </CENTER>
+  	</FONT>
+  </HEADER>
+
+  <BODY>
+    <TABLE>
+      <TH class="tableHeader">FUNCTION NAME</TH>
+      <TH class="tableHeader">FUNCTION DESCRIPTION</TH>
+      <TR>
+        <TD class="name">permTestEngine</TD>
+        <TD class="description">Test engine: Generates permutation arrays, sends them to the tester, and displays test results</TD>
+      </TR>
+      <TR>
+        <TD class="name">nQueensTestPositional</TD>
+        <TD class="description">Diagonal-collision tester: Tests by computing position numbers and testing those numbers</TD>
+      </TR>
+      <TR>
+        <TD class="name">nQueensTestIndexee</TD>
+        <TD class="description">Diagonal-collision tester: Tests by comparing differences between array indices and their values</TD>
+      </TR>
+      <TR>
+        <TD class="name">permAnimate</TD>
+        <TD class="description">The top-level display function; takes n and sequentially displays all permutations of n</TD>
+      </TR>
+      <TR>
+        <TD class="name">permGenArray</TD>
+        <TD class="description">Generates an array called 'window.permutationsArray' of all permutations of 1 through n. </TD>
+      </TR>
+      <TR>
+        <TD class="name">swap</TD>
+        <TD class="description">Helper function for permutation engine: swaps two numbers (in-place of given positions in an array</TD>
+      </TR>
+      <TR>
+        <TD class="name">starterArrayGen</TD>
+        <TD class="description">Creates and returns a single array of length n</TD>
+      </TR>
+      <TR>
+        <TD class="name">translatePermutationToNumericMatrix</TD>
+        <TD class="description">Takes a permutation array and returns a character matrix of '1's and '0's</TD>
+      </TR>
+      <TR>
+        <TD class="name">translatePermutationToCharacterMatrix</TD>
+        <TD class="description">Takes a permutation array and returns a character matrix of queens and blanks</TD>
+      </TR>
+      <TR>
+        <TD class="name">displayPermutationMatrix</TD>
+        <TD class="description">Displays a single permutation array as a chess board</TD>
+      </TR>
+      <TR>
+        <TD class="name">showBoards</TD>
+        <TD class="description">Used by permAnimate to cycle through all elements of a permutations array and call 'showBoard' to display each one</TD>
+      </TR>
+      <TR>
+        <TD class="name">showBoard</TD>
+        <TD class="description">Takes a single permutation and displays it as a chessboard</TD>
+      </TR>
+      <TR>
+        <TD class="name">analysis</TD>
+        <TD class="description">Calculates and reports a comparison of the number of possible permutations of n versus the number of possible arrangements of n on an n^2 board</TD>
+      </TR>
+      <TR>
+        <TD class="name">factorial</TD>
+        <TD class="description">Helper function for 'analysis' which returns the factorial value of n</TD>
+      </TR>
+      <TR>
+        <TD class="name">isUnique</TD>
+        <TD class="description">Duplication-tester for nQueensTestIndexee. Returns boolean re: whether the given array has any duplicate values</TD>
+      </TR>
+    </TABLE>
+  </BODY>
+  
+</HTML>
