@@ -86,10 +86,28 @@ function nQueensTest(permArray) {  // COMPLEXITY: O(n^2 + n)
     // var deduped = new Set(permArray.map(function (){value-(n-index) diff})) ;
     // IF deduped.size !== permArray.length, FAIL
 
-// OR  return ((new Set(permArray.map(function (){index-value diff}))).size === permArray.length) &&
-//     return ((new Set(permArray.map(function (){value-(n-index) diff}))).size === permArray.length);
+// OR  return ((new Set(permArray.map(function (){value-index diff}))).size === permArray.length) &&
+//            ((new Set(permArray.map(function (){value-(n-index) diff}))).size === permArray.length);
 
+function nQueensTestIndexee(n) {
+  var i = 0;
+  return (new Set(permArray.map(function(e){
+    i++;
+    console.log(e-i);
+    console.log('i = ', i, '\ne = ', e);
+    return e-i;
+  })).size === permArray.length
+  
+  &&
+  
+  new Set(permArray.map(function(e){
+  i++;
+  console.log(e-(n-i));
+  console.log('i = ', i, '\ne = ', e);
+  return e-i;
+  })).size === permArray.length );
 
+};
 // https://stackoverflow.com/questions/9229645/remove-duplicates-from-javascript-array
 // DUPE TRUTH-TEST ACQUIRED FROM STACK-OVERFLOW:
 

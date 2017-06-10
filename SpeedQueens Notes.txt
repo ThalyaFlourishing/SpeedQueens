@@ -2,3 +2,7 @@
  . # OF POSSIBLE ARRANGEMENTS OF k ELEMENTS OUT OF n :
    n! / k!(n-k)!
    . For nQueens(8), this means that n = 64 and k = 8
+   
+   
+ 1, 3, 0, 2, 3, 0,-6,-4
+ 

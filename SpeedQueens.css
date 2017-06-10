@@ -12,14 +12,14 @@ table {
 .tableHeader {
   background-color: #000000;
   color: #449944;
-  font: 15px OCR A;
+  font: 16px OCR A;
   padding: 4;
 }
 
 .name {
   background-color: #222222;
   color: #4477CC;
-  font: 13px OCR A;
+  font: 14px OCR A;
   text-align: right;
   padding: 4;
 }
@@ -27,6 +27,6 @@ table {
 .description {
   background-color: #000000;
   color: #FF9944;
-  font: 13px OCR A;
+  font: 14px OCR A;
   padding: 4;
 }

@@ -106,7 +106,7 @@ var translatePermutationToNumericMatrix = function(permutation) {
 //=============================================================================//
 
 var translatePermutationToCharacterMatrix = function(permutation) {
-  var output = [];
+  var outputArray = [];
   var row;
   var queen = String.fromCodePoint(9819);
 
@@ -119,10 +119,10 @@ var translatePermutationToCharacterMatrix = function(permutation) {
         row.push('__');   // white chess queen  ? U+2655  &#9813;    String.fromCodePoint(9813)
       }
     }
-    output.push(row);
+    outputArray.push(row);
   }
 
-  return output;
+  return outputArray;
 };
 
 //=============================================================================//
