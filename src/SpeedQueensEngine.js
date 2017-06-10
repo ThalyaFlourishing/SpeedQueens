@@ -1,6 +1,73 @@
-var permutationsArray = [];
-var solutionsArray = [];
-var COUNT = 1;
+  var permutationsArray = [];
+  var solutionsArray = [];
+
+function speedQueens(n) {
+  solutionsArray = [];
+  let timeStart = new Date();
+  speedPermTestEngine(n);
+  let timeEnd = new Date();
+  let elapsedTime = ((timeEnd - timeStart)/1000);
+  
+//  var outputString = 'The number of nQueens solutions for a board of size ' + n + ' is ' + solutionsArray.length + '.\nThis computation took ' + elapsedTime + ' seconds. \nTo see all solution boards, enter \'showBoards(solutionsArray)\'';
+//  console.log(outputString);
+  return 'The number of nQueens solutions for a board of size ' + n + ' is ' + solutionsArray.length + '.\nThis computation took ' + elapsedTime + ' seconds. \nTo see all solution boards, enter \'showBoards(solutionsArray)\'';
+}
+
+function nQueens(n) {
+
+  solutionsArray = [];
+  timeStart = new Date();
+  permTestEngine(n);
+  timeEnd = new Date();
+
+  console.log('The number of nQueens solutions for a board of size ', n, ' is ', solutionsArray.length);
+  console.log('This computation took ', ((timeEnd - timeStart)/1000), 'seconds.');
+  console.log('To see all solution boards, enter \'showBoards(solutionsArray)\'');
+}
+
+//=============================================================================//
+//========================  MAIN TESTING ENGINE: FAST  ========================//
+//=============================================================================//
+
+var speedPermTestEngine = function (n, inputArray) {  // COMPLEXITY = O(n! * (n^2 + n) )
+  
+  if (n < 1) { return 'Input value must be positive.'; };
+  
+  if(inputArray){
+    array = inputArray.slice();
+    } else {
+      array = starterArrayGen(n);
+    };
+
+  if (n === 1) {
+    //  IF TEST FUNCTION RETURNS TRUE
+    if(nQueensTestIndexee(array)) {
+    
+      // PUSH TO SOLUTIONS ARRAY
+      solutionsArray.push(array);
+      
+      // DISPLAY SOLUTION PERM, SOLUTION BOARD, AND A MESSAGE ANNOUNCING SOLUTION
+      // REMOVED TO INCREASE SPEED
+      // showBoard(array);
+      // console.log('SOLUTION FOUND: ', array);
+    }
+  
+  } else {
+    for (var i = 1; i <= n; i += 1) {
+      speedPermTestEngine((n - 1), array);
+      if (n % 2) {
+        var j = 1;
+      } else {
+        var j = i;
+      }
+      swap(array, j - 1, n - 1); // -1 TO ACCOUNT FOR JAVASCRIPT ZERO-INDEXING
+    }
+  }
+};
+
+//=============================================================================//
+//=======================  MAIN TESTING ENGINE: VERBOSE  ======================//
+//=============================================================================//
 
 var permTestEngine = function (n, inputArray) {  // COMPLEXITY = O(n! * (n^2 + n) )
   
@@ -13,14 +80,20 @@ var permTestEngine = function (n, inputArray) {  // COMPLEXITY = O(n! * (n^2 + n
     };
 
   if (n === 1) {
-//    permutationsArray.push(array);
-    console.log('CALL TO TEST FUNCTION ', COUNT++);
     //  IF TEST FUNCTION RETURNS TRUE
+    if(nQueensTestIndexee(array)) {
+    
       // PUSH TO SOLUTIONS ARRAY
-    // DISPLAY SOLUTION PERM, SOLUTION BOARD, AND A MESSAGE ANNOUNCING SOLUTION
+      solutionsArray.push(array);
+      
+      // DISPLAY SOLUTION PERM, SOLUTION BOARD, AND A MESSAGE ANNOUNCING SOLUTION
+      showBoard(array);
+      console.log('SOLUTION FOUND: ', array);
+    }
+  
   } else {
     for (var i = 1; i <= n; i += 1) {
-      permGenArray((n - 1), array);
+      permTestEngine((n - 1), array);
       if (n % 2) {
         var j = 1;
       } else {
@@ -29,9 +102,12 @@ var permTestEngine = function (n, inputArray) {  // COMPLEXITY = O(n! * (n^2 + n
       swap(array, j - 1, n - 1); // -1 TO ACCOUNT FOR JAVASCRIPT ZERO-INDEXING
     }
   }
-  return 'The number of nQueens solutions for a board of size ', n, ' is ', solutionsArray.length;
 };
 
+//=============================================================================//
+//================  FUNCTION TO GENERATE ARRAY OF PERMUTATIONS  ===============//
+//=============================================================================//
+  
 var permGenArray = function (n, inputArray) {
   
   if (n < 1) { return 'Input value must be positive.'; };
@@ -44,7 +120,6 @@ var permGenArray = function (n, inputArray) {
 
   if (n === 1) {
     permutationsArray.push(array);
-//    console.log('CALL TO TEST FUNCTION ', COUNT++);
   } else {
     for (var i = 1; i <= n; i += 1) {
       permGenArray((n - 1), array);

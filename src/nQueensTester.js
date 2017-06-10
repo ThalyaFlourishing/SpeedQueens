@@ -1,12 +1,72 @@
-                        // INFOZ: . INDEX = ROW
-                        // INFOZ: . VALUE = COL
-                        // QUEST: ? STILL NEED TO DEAL WITH +1/-1 OFFSETS?
-                        // QUEST: ? WHAT PROBLEM IS CAUSED BY STARTING LOCATIONS AT 1 INSTEAD OF 0?
-                        // ANSWR: . THEORY: AS LONG AS EVERYTHING IS SET THE SAME RE OFFSETS,
-                                  // THEN IT DOES NOT MATTER
-                        // INFOZ: . YOU DO NOT NEED TO WORRY ABOUT SEARCHING PAST THE BOTTOM
-                                  // OF THE BOARD BECAUSE THERE WILL NEVER BE PIECES THERE
-                                  // THE FALSE-POSITIVES COME FROM WRAPPING OVER COLUMNS, NOT ROWS
+
+var n8solutions = [
+[4,7,3,8,2,5,1,6],
+[5,2,4,7,3,8,6,1],
+[4,2,7,3,6,8,5,1],
+[4,6,8,3,1,7,5,2],
+[3,6,8,1,4,7,5,2],
+[5,3,8,4,7,1,6,2],
+[5,7,4,1,3,8,6,2],
+[4,1,5,8,6,3,7,2],
+[3,6,4,1,8,5,7,2],
+[6,2,7,1,4,8,5,3],
+[4,7,1,8,5,2,6,3],
+[6,4,7,1,8,2,5,3]];
+
+var n8nonSolutions = [
+[2,7,3,8,4,5,1,6],
+[5,4,2,7,3,8,6,1],
+[4,2,1,3,6,8,5,7],
+[4,6,8,5,1,7,3,2],
+[3,6,7,1,4,8,5,2],
+[5,4,3,2,1,6,7,8],
+[5,4,7,1,8,3,6,2],
+[1,2,3,4,5,6,7,8],
+[8,7,6,5,4,3,2,1],
+[4,3,2,1,8,7,6,5],
+[1,4,2,6,3,7,5,8],
+[6,5,2,1,8,7,4,3]]
+
+var n8someSolutions = [
+[2,7,3,8,4,5,1,6],
+[5,7,4,1,3,8,6,2],
+[5,4,2,7,3,8,6,1],
+[4,1,5,8,6,3,7,2],
+[4,2,1,3,6,8,5,7],
+[3,6,4,1,8,5,7,2],
+[4,6,8,5,1,7,3,2],
+[6,2,7,1,4,8,5,3],
+[3,6,7,1,4,8,5,2],
+[4,7,1,8,5,2,6,3],
+[5,4,3,2,1,6,7,8],
+[6,4,7,1,8,2,5,3]]
+
+function tester(solutionsArray) {
+  for(let i = 0; i < solutionsArray.length; i++) {
+    console.log(nQueensTestIndexee(solutionsArray[i]));    
+    }  
+  }
+
+
+function nQueensTestIndexee(permArray) {
+  var i = 0;
+  var j = 0;
+  n = permArray.length;
+  return (new Set(permArray.map(function(e){
+    i++;
+    return e-i;
+  })).size === n
+  
+  &&
+  
+  new Set(permArray.map(function(e){
+  j++;
+  return e-(n-j);
+  })).size === n
+  );
+
+};
+
 
 // DELCARE FUNCTION WITH A SINGLE PERM ARRAY AS INPUT
 function nQueensTest(permArray) {  // COMPLEXITY: O(n^2 + n)
@@ -89,25 +149,7 @@ function nQueensTest(permArray) {  // COMPLEXITY: O(n^2 + n)
 // OR  return ((new Set(permArray.map(function (){value-index diff}))).size === permArray.length) &&
 //            ((new Set(permArray.map(function (){value-(n-index) diff}))).size === permArray.length);
 
-function nQueensTestIndexee(n) {
-  var i = 0;
-  return (new Set(permArray.map(function(e){
-    i++;
-    console.log(e-i);
-    console.log('i = ', i, '\ne = ', e);
-    return e-i;
-  })).size === permArray.length
-  
-  &&
-  
-  new Set(permArray.map(function(e){
-  i++;
-  console.log(e-(n-i));
-  console.log('i = ', i, '\ne = ', e);
-  return e-i;
-  })).size === permArray.length );
 
-};
 // https://stackoverflow.com/questions/9229645/remove-duplicates-from-javascript-array
 // DUPE TRUTH-TEST ACQUIRED FROM STACK-OVERFLOW:
 
