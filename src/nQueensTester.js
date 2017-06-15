@@ -43,7 +43,7 @@ var n8someSolutions = [
 
 function tester(solutionsArray) {
   for(let i = 0; i < solutionsArray.length; i++) {
-    console.log(nQueensTestIndexee(solutionsArray[i]));    
+    console.log(nQueensTestIndexeeUniq(solutionsArray[i]));    
     }  
   }
 
@@ -68,8 +68,27 @@ function nQueensTestIndexee(permArray) {
 };
 
 
+function nQueensTestIndexeeUniq(permArray) {
+  var i = 0;
+  var j = 0;
+  n = permArray.length;
+  return isUnique(permArray.map(function(e){
+    i++;
+    return e-i;
+  }))
+  
+  &&
+  
+  isUnique(permArray.map(function(e){
+  j++;
+  return e-(n-j);
+  }));
+
+};
+
+
 // DELCARE FUNCTION WITH A SINGLE PERM ARRAY AS INPUT
-function nQueensTest(permArray) {  // COMPLEXITY: O(n^2 + n)
+function nQueensTestPositional(permArray) {  // COMPLEXITY: O(n^2 + n)
 
   let n = permArray.length;
   let locationArray = [];

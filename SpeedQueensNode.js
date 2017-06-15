@@ -33,7 +33,7 @@ function arrayQueens(n) {
 //  permGenArray(n);
   solutionsArray = [];
   let timeStart = new Date();
-  let count = arrayTestEngine(window.permutationsArray);
+  let count = arrayTestEngine(permutationsArray);
   let timeEnd = new Date();
   let elapsedTime = ((timeEnd - timeStart)/1000);
 
@@ -296,16 +296,140 @@ var factorial = function(n) {
   n = n * factorial(n - 1);
     return n;
 };
+function tester(solutionsArray) {
+  for(let i = 0; i < solutionsArray.length; i++) {
+    console.log(nQueensTestIndexeeUniq(solutionsArray[i]));    
+    }  
+  }
+
+
+function nQueensTestIndexee(permArray) {
+  var i = 0;
+  var j = 0;
+  n = permArray.length;
+  return (new Set(permArray.map(function(e){
+    i++;
+    return e-i;
+  })).size === n
+  
+  &&
+  
+  new Set(permArray.map(function(e){
+  j++;
+  return e-(n-j);
+  })).size === n
+  );
+
+};
+
+
+function nQueensTestIndexeeUniq(permArray) {
+  var i = 0;
+  var j = 0;
+  n = permArray.length;
+  return isUnique(permArray.map(function(e){
+    i++;
+    return e-i;
+  }))
+  
+  &&
+  
+  isUnique(permArray.map(function(e){
+  j++;
+  return e-(n-j);
+  }));
+
+};
+
+
+// DELCARE FUNCTION WITH A SINGLE PERM ARRAY AS INPUT
+function nQueensTestPositional(permArray) {  // COMPLEXITY: O(n^2 + n)
+
+  let n = permArray.length;
+  let locationArray = [];
+
+  // ITERATE OVER ARRAY TO GENERATE ARRAY OF LOCATION NUMBERS:  --  (SEPARATE FUNCTION?)
+  for(let i = 0; i < n; i++) {
+    // TEST FOR IMMEDIATE DIAG COLLISION: (PERFORM EFFICIENCY COMPARISON ON HAVING THIS VS. NOT)
+    if(Math.abs(permArray[i] - permArray[i+1]) === 1) { return false;};
+
+    // SET LOCATION TO (COL + (ROW)*n)      //  - 1 ??
+    let location = (permArray[i] + (i*n))
+
+    // PUSH LOCATION NUMBER TO LOCATION ARRAY
+    locationArray.push(location);
+  }
+
+  // ITERATE OVER LOCATIONS ARRAY:
+  for(let i = 0; i < n-1; i++) {    // n-1 HERE BECAUSE WE DO NOT NEED TO TEST THE LAST LOCATION
+
+    // STORE COLUMN NUMBER FOR LATER USE
+    let col = locationArray[i];
+
+    // ITERATE OVER EACH SUBSEQUENT ELEMENT
+    for(let j = i+1; j < n-i; j++) {  // i+1 HERE BECAUSE WE ARE COMPARING ARRAY[i] TO ARRAY[i+1]
+                                      // n-i HERE BECAUSE WE ONLY WANT TO COMPARE THE REMAINING LOCS
+
+                                      // INFOZ: COL = LOCATIONARRAY[i]
+      if(j < col){ //(!!!) FOR n-1 (MINOR), COUNT UP TO CURRENT LOCATION'S COL-1 TIMES ONLY (!!!)
+
+      // TEST FOR MINOR DIAGONAL ALIGNMENT
+        if(((locationArray[j] - locationArray[i]) % (n-1)) === 0 ){  // MINOR DIAG COLLISION TEST
+          return false
+        }
+      };
+
+
+    // (!!!) FOR n+1 (MAJOR), COUNT *UP TO CURRENT LOCATION'S n-COL TIMES ONLY (!!!)
+      if(j < (n - col)){
+
+      // TEST FOR MAJOR DIAGONAL ALIGNMENT
+        if(((locationArray[j] - locationArray[i]) % (n+1)) === 0 ){  // MAJOR DIAG COLLISION TEST
+          return false
+        }
+      }; // END SECOND IF
+    };   // END J FOR LOOP
+  };     // END I FOR LOOP
+
+  // RETURN TRUE (SINCE NO ALIGNMENT WAS FOUND)
+  console.log('RETURNING TRUE');
+  return true
+};
+//============================================================================//
+//=============================  DUPLICATES TEST =============================//
+//============================================================================//
+
+
+function isUnique(array) {
+    var seen = {};
+    var len = array.length;
+    var j = 0;
+    for(var i = 0; i < len; i++) {
+         var item = array[i];
+         if(seen[item] === 1) {
+           return false;
+         } else {
+               seen[item] = 1;
+         }
+    }
+  return true;
+}
 
 
 
 
-/*
+// EXECUTION
+console.log('GENERATING PERMUTATIONS ARRAY OF LENGTH 10');
+console.log(permGenArray(10));
+console.log('PERMUTATIONS ARRAY MADE, LENGTH = ', permutationsArray.length);
 
- . # OF POSSIBLE ARRANGEMENTS OF k ELEMENTS OUT OF n :
-   n! / k!(n-k)!
-   . For nQueens(8), this means that n = 64 and k = 8
-   . So, for nQueens, the formula is:
-   n^2! / n!(n^2 - n)!
-
-*/
+console.log(arrayQueens(10));
+console.log(arrayQueens(10));
+console.log(arrayQueens(10));
+console.log(arrayQueens(10));
+console.log(arrayQueens(10));
+console.log(speedQueens(10));
+console.log(speedQueens(10));
+console.log(speedQueens(10));
+console.log(speedQueens(10));
+console.log(speedQueens(10));
