@@ -1,7 +1,20 @@
-  var permutationsArray = [];
-  var solutionsArray = [];
+var permutationsArray = [];
+var solutionsArray = [];
+
+function evenSpeedierQueens(n) {
+  if (n < 1) { return 'Input value must be positive.'; };
+  solutionsArray = [];
+  let timeStart = new Date();
+  array = starterArrayGen(n);
+  superSpeedPermTestEngine(n, array);
+  let timeEnd = new Date();
+  let elapsedTime = ((timeEnd - timeStart)/1000);
+  
+  return 'The number of nQueens solutions for a board of size ' + n + ' is ' + solutionsArray.length + '.\n This computation took ' + elapsedTime + ' seconds. \n To see all solution boards, enter \'showBoards(solutionsArray)\'';
+}
 
 function speedQueens(n) {
+  if (n < 1) { return 'Input value must be positive.'; };
   solutionsArray = [];
   let timeStart = new Date();
   speedPermTestEngine(n);
@@ -24,62 +37,50 @@ function nQueens(n) {
 
 
 //=============================================================================//
-//== FOR COMPARISON: GENERATE A PERMUTTION ARRAY FIRST, THEN TEST THAT ARRAY ==//
+//========================  MAIN TESTING ENGINE: FASTER  ========================//
 //=============================================================================//
 
-function arrayQueens(n) {
+var superSpeedPermTestEngine = function (n, array) {  // COMPLEXITY = O(n! * (n^2 + n) )
 
-//  permutationsArray = [];
-//  permGenArray(n);
-  solutionsArray = [];
-  let timeStart = new Date();
-  let count = arrayTestEngine(window.permutationsArray);
-  let timeEnd = new Date();
-  let elapsedTime = ((timeEnd - timeStart)/1000);
-
-  return 'The number of nQueens solutions for a board of size ' + n + ' is ' + count + '.\n This computation took ' + elapsedTime + ' seconds. \n To see all solution boards, enter \'showBoards(solutionsArray)\'';
-}
-
-function arrayTestEngine(inputArray) {
-  
-  let count = 0;
-  let len = inputArray.length;
-  
-  for(let i = 0; i < len; i++) {
-    if(nQueensTestIndexee(inputArray[i])) {
-      // solutionsArray.push(array);
-      count++;
+  if (n === 1) {
+    
+    if(noConsecutives(array)) {
+      if(nQueensTestIndexeeUniq(array)) {
+        solutionsArray.push(array);
+      }
+    }
+  } else {
+    for (var i = 1; i <= n; i += 1) {
+      superSpeedPermTestEngine((n - 1), array);
+      if (n % 2) {
+        var j = 1;
+      } else {
+        var j = i;
+      }
+//      swap(array, j - 1, n - 1);
+      if(!(j === n)) {swap(array, j - 1, n - 1);}; // DO NOT BOTHER SWAPPING EQUAL INDICES
     }
   }
-  return count;
-}
-
+};
 
 //=============================================================================//
 //========================  MAIN TESTING ENGINE: FAST  ========================//
 //=============================================================================//
 
 var speedPermTestEngine = function (n, inputArray) {  // COMPLEXITY = O(n! * (n^2 + n) )
+// debugger;
   
   if (n < 1) { return 'Input value must be positive.'; };
-  
+
   if(inputArray){
     array = inputArray.slice();
     } else {
       array = starterArrayGen(n);
     };
-
-  if (n === 1) {
-    //  IF TEST FUNCTION RETURNS TRUE
-    if(nQueensTestIndexeeUniq(array)) {
     
-      // PUSH TO SOLUTIONS ARRAY
+  if (n === 1) {
+    if(nQueensTestIndexeeUniq(array)) {
       solutionsArray.push(array);
-      
-      // DISPLAY SOLUTION PERM, SOLUTION BOARD, AND A MESSAGE ANNOUNCING SOLUTION
-      // REMOVED TO INCREASE SPEED
-      // showBoard(array);
-      // console.log('SOLUTION FOUND: ', array);
     }
   
   } else {
@@ -110,13 +111,8 @@ var permTestEngine = function (n, inputArray) {  // COMPLEXITY = O(n! * (n^2 + n
     };
 
   if (n === 1) {
-    //  IF TEST FUNCTION RETURNS TRUE
     if(nQueensTestIndexee(array)) {
-    
-      // PUSH TO SOLUTIONS ARRAY
       solutionsArray.push(array);
-      
-      // DISPLAY SOLUTION PERM, SOLUTION BOARD, AND A MESSAGE ANNOUNCING SOLUTION
       showBoard(array);
       console.log('SOLUTION FOUND: ', array);
     }
@@ -133,6 +129,39 @@ var permTestEngine = function (n, inputArray) {  // COMPLEXITY = O(n! * (n^2 + n
     }
   }
 };
+
+
+//==============================================================================//
+//== FOR COMPARISON: GENERATE A PERMUTATION ARRAY FIRST, THEN TEST THAT ARRAY ==//
+//==============================================================================//
+
+function arrayQueens(n) {
+
+//  permutationsArray = [];
+//  permGenArray(n);
+  solutionsArray = [];
+  let timeStart = new Date();
+  let count = arrayTestEngine(window.permutationsArray);
+  let timeEnd = new Date();
+  let elapsedTime = ((timeEnd - timeStart)/1000);
+
+  return 'The number of nQueens solutions for a board of size ' + n + ' is ' + count + '.\n This computation took ' + elapsedTime + ' seconds. \n To see all solution boards, enter \'showBoards(solutionsArray)\'';
+}
+
+function arrayTestEngine(inputArray) {
+  
+  let count = 0;
+  let len = inputArray.length;
+  
+  for(let i = 0; i < len; i++) {
+    if(nQueensTestIndexee(inputArray[i])) {
+      // solutionsArray.push(array);
+      count++;
+    }
+  }
+  return count;
+}
+
 
 //=============================================================================//
 //================  FUNCTION TO GENERATE ARRAY OF PERMUTATIONS  ===============//

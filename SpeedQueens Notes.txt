@@ -28,19 +28,23 @@ Number of solutions per 'n':
  19   |  4,968,057,848
  20   | 39,029,188,884
 
+=======================================================================
 
+  Heap's flow:
+  
+ Lay out recursive line from n to 1:
+ 
+ recurse(8), recurse(7), recurse(6), recurse(5), recurse(4), recurse(3), recurse(2), recurse(1) 
 
+ Starting with recurse(1), test first array (always fails), then return to next in line to left (recurse(2))
+ 
+ This returns flow to just under the recursive call, leading then to the swapper
+ 
+ If n is currently odd, set j to i and swap the first element with the second element
+ 
+ Increment i, which has the effect of moving one step to the right and then laying out recursive line from n-1 to 1
 
-
-
-
-
-
-
-
-
-
-
+ For each new permutation, one must count back down to n = 1, leaving a trail of recursive units of progressively smaller size, each of which is then evaluated
 
 
 

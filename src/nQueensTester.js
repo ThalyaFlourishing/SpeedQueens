@@ -67,6 +67,20 @@ function nQueensTestIndexee(permArray) {
 
 };
 
+// --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  //
+  // CONSECUTIVE-CHECKER HELPER FUNCTION
+
+function noConsecutives(inputArray){
+  
+  let len = inputArray.length;
+
+  for(let i = 0; i < len; i++) {
+    if(Math.abs(inputArray[i] - inputArray[i+1]) === 1) { return false;};
+  }
+
+  return true;
+}
+
 
 function nQueensTestIndexeeUniq(permArray) {
   var i = 0;
@@ -83,8 +97,31 @@ function nQueensTestIndexeeUniq(permArray) {
   j++;
   return e-(n-j);
   }));
-
 };
+
+
+// https://stackoverflow.com/questions/9229645/remove-duplicates-from-javascript-array
+// DUPE TRUTH-TEST ACQUIRED FROM STACK-OVERFLOW:
+
+function isUnique(array) {
+    var seen = {};
+    var len = array.length;
+    var j = 0;
+    for(var i = 0; i < len; i++) {
+         var item = array[i];
+         if(seen[item] === 1) {
+           return false;
+         } else {
+               seen[item] = 1;
+         }
+    }
+  return true;
+}
+
+
+//=================================================================================//
+//== THEN THERE IS THIS WHOLE POSITIONAL METHOD WHICH I HAVE YET TO ACTUALLY TRY ==//
+//=================================================================================//
 
 
 // DELCARE FUNCTION WITH A SINGLE PERM ARRAY AS INPUT
@@ -140,6 +177,7 @@ function nQueensTestPositional(permArray) {  // COMPLEXITY: O(n^2 + n)
   console.log('RETURNING TRUE');
   return true
 };
+
 //============================================================================//
 //============  TEST WHETHER THIS PRE-TEST IS AN EFFICIENCY GAIN: ============//
 //============================================================================//
@@ -167,22 +205,3 @@ function nQueensTestPositional(permArray) {  // COMPLEXITY: O(n^2 + n)
 
 // OR  return ((new Set(permArray.map(function (){value-index diff}))).size === permArray.length) &&
 //            ((new Set(permArray.map(function (){value-(n-index) diff}))).size === permArray.length);
-
-
-// https://stackoverflow.com/questions/9229645/remove-duplicates-from-javascript-array
-// DUPE TRUTH-TEST ACQUIRED FROM STACK-OVERFLOW:
-
-function isUnique(array) {
-    var seen = {};
-    var len = array.length;
-    var j = 0;
-    for(var i = 0; i < len; i++) {
-         var item = array[i];
-         if(seen[item] === 1) {
-           return false;
-         } else {
-               seen[item] = 1;
-         }
-    }
-  return true;
-}
